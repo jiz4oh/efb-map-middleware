@@ -5,6 +5,7 @@ from ehforwarderbot.message import LocationAttribute
 from ehforwarderbot.types import ModuleID, InstanceID
 from urllib.parse import urlparse, parse_qs, unquote
 import requests as requests
+import copy
 
 
 class MapMiddleware(Middleware):
@@ -44,5 +45,9 @@ class MapMiddleware(Middleware):
         if message.type == MsgType.Link:
             m = self.parse_amap_url(message.attributes.url)
             if m:
-                return m
+                msg = copy.deepcopy(message)
+                msg.type = m.type
+                msg.text = m.text
+                msg.attributes = m.attributes
+                return msg
         return message

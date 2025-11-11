@@ -10,6 +10,14 @@
 
 replace the parsable amap url to the `Location` message.
 
+### before
+
+<img width="666" height="298" alt="PixPin_2025-11-11_18-14-49" src="https://github.com/user-attachments/assets/aa0c56cf-6228-47e3-ad16-792231cfaa26" />
+
+### after
+
+<img width="674" height="322" alt="PixPin_2025-11-11_18-14-59" src="https://github.com/user-attachments/assets/40b48286-306c-4391-a172-b19ff19b3d62" />
+
 ## Dependense
 * Python >= 3.6
 * EFB >= 2.0.0

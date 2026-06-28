@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name="efb-map-middleware",
     packages=find_packages(),
-    version="0.1.0",
+    version="0.1.1",
     description="parse amap url",
     author="jiz4oh",
     author_email="me@jiz4oh.com",

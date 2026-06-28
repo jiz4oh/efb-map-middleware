@@ -11,7 +11,7 @@ import copy
 class MapMiddleware(Middleware):
     middleware_id: ModuleID = ModuleID("jiz4oh.map")
     middleware_name: str = "Map Middleware"
-    __version__: str = "0.1.0"
+    __version__: str = "0.1.1"
 
     def __init__(self, instance_id: Optional[InstanceID] = None):
         super().__init__(instance_id)
@@ -42,12 +42,17 @@ class MapMiddleware(Middleware):
         return None
 
     def process_message(self, message: Message) -> Optional[Message]:
-        if message.type == MsgType.Link:
-            m = self.parse_amap_url(message.attributes.url)
-            if m:
-                msg = copy.deepcopy(message)
-                msg.type = m.type
-                msg.text = m.text
-                msg.attributes = m.attributes
-                return msg
+        if message.type != MsgType.Link:
+            return message
+
+        if not message.attributes or not getattr(message.attributes, "url", None):
+            return message
+
+        m = self.parse_amap_url(message.attributes.url)
+        if m:
+            msg = copy.copy(message)
+            msg.type = m.type
+            msg.text = m.text
+            msg.attributes = m.attributes
+            return msg
         return message
